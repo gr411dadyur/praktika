@@ -23,9 +23,8 @@
             <div class="product-info">
                 <h1>{{ product }}</h1>
                 <a v-bind:href="link">More products like this</a>
-                <p v-if="inventory > 10">In Stock</p>
-                <p v-else-if="inventory <= 10 && inventory > 0">Almost sold out!</p>
-                <p v-else>Out of Stock</p>
+                <p v-if="inStock">In Stock</p>
+                <p v-else :class="{isNotStock: !inStock}">Out of Stock</p>
                 <span>
                     <p v-if="onSale">Распродажа</p>
                     <p v-else>Нет распродажи</p>
@@ -50,9 +49,14 @@
                     </div>
                     <button 
                     v-on:click="addToCart"
-                    :disabled="!inStock"
+                    :disabled="!inStock" 
                     :class="{ disabledButton: !inStock }">Add to cart</button>
                     <button v-on:click="delToCart">Del to cart</button>
+                
+
+
+                    
+                    
                     
             </div>
         </div>
