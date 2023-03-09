@@ -21,9 +21,7 @@ Vue.component('product', {
                 <p v-else :class="{isNotStock: !inStock}">Out of Stock</p>
                 <p>{{ sale }}</p>
                 <p>Shipping: {{ shipping }}</p>
-                <ul>
-                    <li v-for="detail in details">{{ detail }}</li>
-                 </ul>
+                <product-details :details="details"></product-details>
                  <div
                      class="color-box"
                      v-for="(variant, index) in variants"
@@ -123,6 +121,7 @@ computed: {
 
 
  }),
+ 
  Vue.component('product-details', {
     props: {
       details: {
