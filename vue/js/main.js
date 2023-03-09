@@ -72,7 +72,7 @@ Vue.component('product', {
             }
         ],
         sizes: ['S', 'M', 'L', 'XL', 'XXL', 'XXXL'],
-        cart: 0,
+        
     }
   },
   methods: {
@@ -140,6 +140,7 @@ let app = new Vue({
     el: '#app',
     data: {
         premium: true,
+        cart: 0,
     }
     })
 
