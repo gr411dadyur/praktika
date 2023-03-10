@@ -147,11 +147,12 @@ let app = new Vue({
     methods: {
         updateCart(id) {
             this.cart.push(id);
-        }
-     },
+        },
         downCart(id){
             this.cart.pop(id);
         }
+     },
+        
     })
 
 
