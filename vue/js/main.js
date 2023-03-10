@@ -34,13 +34,13 @@ Vue.component('product', {
                  <ul>
                     <li v-for="size in sizes">{{ size }}</li>
                  </ul>
-                 <div class="cart">
-                     <p>Cart({{ cart }})</p>
-                    </div>
-                    <button 
-                    v-on:click="addToCart"
-                    :disabled="!inStock" 
-                    :class="{ disabledButton: !inStock }">Add to cart</button>
+                 
+                 <button v-on:click="addToCart" 
+                 :disabled="!inStock"
+                 :class="{ disabledButton: !inStock }"
+                 >
+               Add to cart
+               </button>
                     <button v-on:click="delToCart">Del to cart</button>
             </div>
         </div>
@@ -62,13 +62,13 @@ Vue.component('product', {
                 variantId: 2234,
                 variantColor: 'green',
                 variantImage: "./assets/vmSocks-green-onWhite.jpg",
-                variantQuantity: 10,
+                variantQuantity: 100,
             },
             {
                 variantId: 2235,
                 variantColor: 'blue',
                 variantImage: "./assets/vmSocks-blue-onWhite.jpg",
-                variantQuantity: 0,
+                variantQuantity: 100,
             }
         ],
         sizes: ['S', 'M', 'L', 'XL', 'XXL', 'XXXL'],
@@ -77,13 +77,15 @@ Vue.component('product', {
   },
   methods: {
     addToCart() {
-        this.cart += 1
+        this.$emit('add-to-cart',
+        this.variants[this.selectedVariant].variantId);
     },
     updateProduct(variantImage) {
         this.image = variantImage
     },
     delToCart() {
-        this.cart -= 1
+        this.$emit('del-to-cart',
+        this.variants[this.selectedVariant].variantId);
     },
     updateProduct(index) {
         this.selectedVariant = index;
@@ -114,7 +116,7 @@ computed: {
         } else {
             return 2.99
         }
-     }
+     },
      
      
      }
@@ -140,8 +142,16 @@ let app = new Vue({
     el: '#app',
     data: {
         premium: true,
-        cart: 0,
-    }
+        cart: [],
+    },
+    methods: {
+        updateCart(id) {
+            this.cart.push(id);
+        }
+     },
+        downCart(id){
+            this.cart.pop(id);
+        }
     })
 
 
